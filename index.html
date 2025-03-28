@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This is a frontendmentor project to learn how to reques data from an api"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <title>Advice Generator</title>
+    <style>
+      :root {
+        font-size: 62.5%;
+        --light-cyan-clr: hsl(193, 38%, 86%);
+        --neon-cyan-clr: hsl(150, 100%, 66%);
+        --grayish-blue-clr: hsl(217, 19%, 38%);
+        --dark-grayish-blue-clr: hsl(217, 19%, 24%);
+        --dark-blue-clr: hsl(218, 23%, 16%);
+
+        interpolate-size: allow-keywords;
+
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .manrope-800{
+        font-family: "Manrope", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        font-style: normal;
+      }
+
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: grid;
+
+        background-color: var(--dark-blue-clr);
+
+        align-items: center;
+        justify-content: center;
+    
+      }
+
+      .advice-container {
+        position: relative;
+        max-width: 700px;
+        text-align: center;
+
+        display: grid;
+        row-gap: 30px;
+       
+
+
+        background-color: var(--dark-grayish-blue-clr);
+
+        padding-inline: clamp(10px, 5vw, 150px);
+        padding-top: 40px;
+        padding-bottom: 50px;
+
+        margin-inline: clamp(5px, 5vw, 50px);
+
+        border-radius: 20px;
+
+        
+      }
+      
+      .heading {
+        text-transform: uppercase;
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        letter-spacing: 2px;
+        color: var(--neon-cyan-clr);
+      }
+      
+      .advice {
+        font-size: clamp(1.6rem, 4vw, 2.8rem);
+        line-height: 1.5;
+        color: var(--light-cyan-clr);
+        max-width: 35ch;
+        justify-self: center;
+        
+        height: 0;
+        width: 40%;
+
+        overflow: clip;
+
+      }
+
+      .advice[close] {
+        width: auto;
+        width: calc-size(auto, size);
+        animation-name: closeHeight;
+        animation-timing-function: ease-in-out;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+      }
+
+      .advice[open] {
+        animation-name: openWidth, openHeight;
+        animation-timing-function: ease-in-out, ease-in-out;
+        animation-duration: 1s, 1s;
+        animation-delay: 0s, 1s;
+        animation-fill-mode: forwards, forwards;
+      }
+
+      @keyframes openWidth {
+        100% {
+          width: auto;
+          width: calc-size(auto, size);
+        }
+      }
+
+      @keyframes openHeight {
+        100% {
+          height: auto;
+          height: calc-size(auto, size);
+        }
+      }
+
+
+      @keyframes closeHeight {
+        0% {
+          height: auto;
+          
+        }
+        100% {
+          height: 0;
+        }
+      }
+      
+      
+      #dice-button {
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        right: 0;
+        margin-inline: auto;
+        width: fit-content;
+        display: flex;
+        place-content: center;
+        
+        padding: 0.8em;
+        
+        border: none;
+        border-radius: 500px;
+
+        background-color: var(--neon-cyan-clr);
+
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+      }
+
+      #dice-button:disabled {
+        background-color: var(--grayish-blue-clr);
+      }
+
+      #dice-button:disabled:hover, #dice-button:disabled:focus {
+        box-shadow: 0px 0px 20px var(--grayish-blue-clr);
+      }
+
+      #dice-button:hover, #dice-button:focus {
+        box-shadow: 0px 0px 20px hsl(150, 100%, 66%);
+      }
+
+      #dice-button:focus-visible {
+        outline-color: cyan;   
+      }
+
+      img[alt="divider"] {
+        width: 90%;
+      }
+
+      @supports (interpolate-size: allow-keywords) {
+        :root {
+          interpolate-size: allow-keywords;
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="advice-container">
+        <span class="heading manrope-800">Advice #<span id="advice-num">100</span></span>
+        <p aria-live="polite" aria-atomic="true" id="advice" class="advice manrope-800"></p>
+        <picture>
+          <source srcset="/pattern-divider-mobile.svg" media="(max-width: 600px)">
+          <img src="/pattern-divider-desktop.svg" alt="divider" aria-hidden="true">
+        </picture>
+        <button type="button" id="dice-button" aria-label="Press to generate another advice">
+          <img width="15px" height="15px" src="icon-dice.svg" alt="dice">
+        </button>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
