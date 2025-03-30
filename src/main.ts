@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     advicePara.addEventListener('animationstart', (e) => {
       if (e.animationName == 'closeHeight') {
         previousWidth = advicePara.clientWidth;
-        console.log(previousWidth);
+  
       }
     }, {once: true});
 
